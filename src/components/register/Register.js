@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router";
 import { useAuthContext } from "../../context/authContext/AuthContext";
 import regStyle from "./register.module.css";
@@ -8,6 +9,19 @@ export const Register = () => {
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [file, setFile] = useState();
+
+  const uploadImage = async () => {
+    console.log(file);
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("upload_preset", "is1qtnx4s");
+
+    const data = await axios
+      .post("https://api.cloudinary.com/v1_1/dtb0aupd7/image/upload", fd)
+      .then((res) => res.data.url);
+    return data;
+  };
 
   return (
     <>
@@ -28,12 +42,18 @@ export const Register = () => {
             </h3>
 
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                register(text, email, password);
-                setEmail("");
-                setText("");
-                setPassword("");
+
+                console.log("register");
+                const url = await uploadImage();
+                if (url) {
+                  console.log(url);
+                  register(text, email, password, url);
+                  setEmail("");
+                  setText("");
+                  setPassword("");
+                }
               }}
             >
               <div className={regStyle.inputs}>
@@ -51,7 +71,6 @@ export const Register = () => {
                 <label htmlFor="name">Email :</label>
                 <input
                   type="email"
-                  name=""
                   id="name"
                   placeholder="Enter Email..."
                   value={email}
@@ -62,11 +81,19 @@ export const Register = () => {
                 <label htmlFor="password">Password:</label>
                 <input
                   type="password"
-                  name=""
                   id="password"
                   placeholder="Enter Password..."
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className={regStyle.inputs}>
+                <label htmlFor="file">abc</label>
+                <input
+                  type="file"
+                  id="file"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  // style={{ display: "none" }}
                 />
               </div>
               <input type="submit" value="Register" className={regStyle.btn} />
