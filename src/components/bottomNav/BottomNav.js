@@ -1,22 +1,19 @@
+import React from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import navStyle from "./nav.module.css";
+import navStyle from "./bottomNav.module.css";
 import { useAuthContext } from "../../context/authContext/AuthContext";
-import { FaHistory } from "react-icons/fa";
-import { FaListAlt } from "react-icons/fa";
+import { BsBellFill } from "react-icons/bs";
+import { GoSearch } from "react-icons/go";
 import { MdWatchLater } from "react-icons/md";
-import { AiFillLike } from "react-icons/ai";
+import { FaUserAlt } from "react-icons/fa";
 import { ImHome } from "react-icons/im";
 
-export const Navbar = () => {
-  const [isActive, setIsActive] = useState(false);
+export const BottomNav = () => {
   const { auth, logout } = useAuthContext();
-
   return (
-    <nav className={navStyle.navbar}>
-      <div className={navStyle.brandTitle}>Societal</div>
-
-      <div className={navStyle.navbarLinks}>
+    <div className={navStyle.bottomNavbar}>
+      <div className={navStyle.bottom}>
         <ul>
           <li>
             <NavLink
@@ -29,7 +26,6 @@ export const Navbar = () => {
               }}
               className={navStyle.navLinks}
               end
-              onClick={() => setIsActive((prev) => !prev)}
             >
               <ImHome style={{ fontSize: "1.25rem" }} />
             </NavLink>
@@ -44,9 +40,8 @@ export const Navbar = () => {
                 height: "100%",
               }}
               className={navStyle.navLinks}
-              onClick={() => setIsActive((prev) => !prev)}
             >
-              <AiFillLike style={{ fontSize: "1.25rem" }} />
+              <GoSearch style={{ fontSize: "1.25rem" }} />
             </NavLink>
           </li>
           <li>
@@ -60,9 +55,8 @@ export const Navbar = () => {
               }}
               className={navStyle.navLinks}
               style={{ position: "relative" }}
-              onClick={() => setIsActive((prev) => !prev)}
             >
-              <FaHistory style={{ fontSize: "1.1rem" }} />
+              <BsBellFill style={{ fontSize: "1.1rem" }} />
             </NavLink>
           </li>
           <li>
@@ -76,9 +70,8 @@ export const Navbar = () => {
               }}
               className={navStyle.navLinks}
               style={{ position: "relative" }}
-              onClick={() => setIsActive((prev) => !prev)}
             >
-              <MdWatchLater style={{ fontSize: "1.25rem" }} />
+              <FaUserAlt style={{ fontSize: "1.25rem" }} />
             </NavLink>
           </li>
           {/* <li className={`${auth ? `${navStyle.logout}` : ""} `}>
@@ -102,7 +95,7 @@ export const Navbar = () => {
                   height: "100%",
                 }}
                 className={navStyle.navLinks}
-                onClick={() => setIsActive((prev) => !prev)}
+               
               >
                 Login
               </NavLink>
@@ -111,6 +104,6 @@ export const Navbar = () => {
             */}
         </ul>
       </div>
-    </nav>
+    </div>
   );
 };

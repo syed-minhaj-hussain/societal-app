@@ -1,0 +1,38 @@
+.bottomNavbar {
+  display: none;
+}
+@media (max-width: 480px) {
+  .bottomNavbar {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 5;
+  }
+  .bottom {
+    display: block;
+    background-color: #000;
+  }
+  .bottom ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .bottom ul li {
+    list-style: none;
+  }
+
+  .bottom li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 1rem;
+    color: #fff;
+  }
+
+  .bottom li:hover {
+    background-color: #555;
+  }
+}

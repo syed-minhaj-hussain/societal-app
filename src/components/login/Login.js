@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logStyle from "./login.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/authContext/AuthContext";
+import { useToastContext } from "../../context/toastContext/ToastContext";
 
 export const Login = () => {
+  const { toast } = useToastContext();
+  const { auth } = useAuthContext();
+  const navigate = useNavigate();
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useAuthContext();
+
+  useEffect(() => {
+    if (auth) {
+      navigate("/profile");
+    }
+  }, []);
+
   return (
     <section>
       <h1 className={logStyle.heading}>Societal</h1>
@@ -13,13 +26,23 @@ export const Login = () => {
           Enter Your Username & Password{" "}
         </h3>
         <form
-        //   onSubmit={(e) => {
-        //     e.preventDefault();
-        //     login(text, password, state?.from);
-        //     // console.log(val);
-        //     setText("");
-        //     setPassword("");
-        //   }}
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (text === "" || password === "") {
+              return toast.error("Input Fields Are Empty", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            }
+            login(text, password);
+            setText("");
+            setPassword("");
+          }}
         >
           <div className={logStyle.inputs}>
             <label htmlFor="name">Username :</label>
