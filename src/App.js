@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Routes, Route } from "react-router-dom";
 import { useAuthContext } from "./context/authContext/AuthContext";
@@ -17,8 +18,12 @@ import { User } from "./features/user/User";
 function App() {
   const { ToastContainer } = useToastContext();
   const { auth, id } = useAuthContext();
+  const navigate = useNavigate();
   useEffect(() => {
-    console.log({ auth });
+    // console.log({ auth });
+    if (!auth) {
+      navigate("/login");
+    }
   }, []);
   // async function getUserDetails() {
   //   const getUser = await axios.get(`http://localhost:5000/users/${id}`, {
