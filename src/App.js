@@ -12,6 +12,7 @@ import { Register } from "./components/register/Register";
 import { Search } from "./components/search/Search";
 import { Profile } from "./components/profile/Profile";
 import { BottomNav } from "./components/bottomNav/BottomNav";
+import { User } from "./features/user/User";
 
 function App() {
   const { ToastContainer } = useToastContext();
@@ -19,13 +20,13 @@ function App() {
   useEffect(() => {
     console.log({ auth });
   }, []);
-  async function getUserDetails() {
-    const getUser = await axios.get(`http://localhost:5000/users/${id}`, {
-      headers: { authorization: auth },
-    });
-    console.log(getUser);
-  }
-  console.log(id);
+  // async function getUserDetails() {
+  //   const getUser = await axios.get(`http://localhost:5000/users/${id}`, {
+  //     headers: { authorization: auth },
+  //   });
+  //   console.log(getUser);
+  // }
+  // console.log(id);
   return (
     <div className="App">
       {/*!auth && <Home /> */}
@@ -36,7 +37,8 @@ function App() {
         <PrivateRoute auth={auth} path="/search" element={<Search />} />
         <PrivateRoute auth={auth} path="/profile" element={<Profile />} />
       </Routes>
-      <button onClick={() => getUserDetails()}>clickme</button>
+      {/* <button onClick={() => getUserDetails()}>clickme</button>
+       */}{" "}
       <ToastContainer
         style={{ maxWidth: "400px" }}
         position="top-right"
@@ -50,6 +52,7 @@ function App() {
         draggable
         pauseOnHover
       />
+      <User />
       {auth && <BottomNav className="bottomLast" />}
     </div>
   );
