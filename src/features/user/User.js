@@ -7,45 +7,82 @@ import { HiOutlineInformationCircle } from "react-icons/hi";
 import { Image } from "cloudinary-react";
 
 export const User = () => {
-  const { user, status, error } = useSelector((state) => state.user);
+  const {
+    user: { rest, myFollowers, myFollowing },
+    status,
+    error,
+  } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  console.log({ user });
+  console.log({ rest });
+  const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchUserByUserId());
     }
   }, [dispatch, status]);
+  console.log(rest?._id !== getUserId);
   return (
     <>
       <div className={userStyle.main}>
         <div className={userStyle.userProfile}>
           <div className={userStyle.leftSide}>
-            <Image
-              cloudName="dtb0aupd7"
-              publicId="https://res.cloudinary.com/dtb0aupd7/image/upload/v1630583058/zs9wt9curf4ebhzylbdd.png"
-            />
+            {rest?.profilePicture ===
+            "https://i.ibb.co/SQbCLBC/virat-dk.jpg" ? (
+              <img
+                src="https://i.ibb.co/SQbCLBC/virat-dk.jpg"
+                alt=""
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  borderRadius: "50%",
+                  padding: "0.3rem",
+                  backgroundColor: "black",
+                }}
+              />
+            ) : (
+              <Image
+                cloudName="dtb0aupd7"
+                publicId={rest?.profilePicture}
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  borderRadius: "50%",
+                  padding: "0.3rem",
+                  backgroundColor: "black",
+                }}
+              />
+            )}
           </div>
           <div className={userStyle.rightSide}>
-            <h1 className={userStyle.name}>{user?.name}</h1>
-            <p className={userStyle.username}>{user?.username}</p>
-
-            <h1 className={userStyle.followers}>
-              <span style={{ fontWeight: "bold" }}>
-                {user?.followers?.length}
-              </span>{" "}
-              followers &nbsp;{" "}
-              <span style={{ fontWeight: "bold" }}>
-                {" "}
-                {user?.following?.length}
-              </span>{" "}
-              following
-            </h1>
-            <p className={userStyle.location}>
-              <ImLocation2 />
-              {user?.location}
-            </p>
-            <HiOutlineInformationCircle className={userStyle.descriptionIcon} />
-            <h2 className={userStyle.description}> {user?.description}</h2>
+            <div>
+              {" "}
+              <h1 className={userStyle.name}>{rest?.name}</h1>
+              <p className={userStyle.username}>{rest?.username}</p>
+              <h1 className={userStyle.followers}>
+                <span style={{ fontWeight: "bold" }}>
+                  {myFollowers?.length}
+                </span>{" "}
+                followers &nbsp;{" "}
+                <span style={{ fontWeight: "bold" }}>
+                  {" "}
+                  {myFollowing?.length}
+                </span>{" "}
+                following
+              </h1>
+              <p className={userStyle.location}>
+                <ImLocation2 />
+                {rest?.location}
+              </p>
+              <HiOutlineInformationCircle
+                className={userStyle.descriptionIcon}
+              />
+              <h2 className={userStyle.description}> {rest?.description}</h2>
+              {rest?._id !== getUserId && (
+                <button className={userStyle.btn}>
+                  {myFollowing?.includes(rest._id) ? "unfollow" : "follow"}
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <div className={userStyle.posts}></div>

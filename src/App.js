@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -14,11 +14,14 @@ import { Search } from "./components/search/Search";
 import { Profile } from "./components/profile/Profile";
 import { BottomNav } from "./components/bottomNav/BottomNav";
 import { User } from "./features/user/User";
+import { NewPost } from "./components/newPost/NewPost";
 
 function App() {
+  const [hide, setHide] = useState(true);
   const { ToastContainer } = useToastContext();
   const { auth, id } = useAuthContext();
   const navigate = useNavigate();
+
   useEffect(() => {
     // console.log({ auth });
     if (!auth) {
@@ -58,6 +61,7 @@ function App() {
         pauseOnHover
       />
       <User />
+      <NewPost hide={hide} setHide={setHide} />
       {auth && <BottomNav className="bottomLast" />}
     </div>
   );

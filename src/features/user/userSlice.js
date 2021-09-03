@@ -9,7 +9,7 @@ export const fetchUserByUserId = createAsyncThunk(
   async () => {
     const response = await getUser(getAuth, getId);
     console.log(response);
-    return response?.data?.rest;
+    return response?.data;
   }
 );
 

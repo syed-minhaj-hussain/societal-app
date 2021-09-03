@@ -1,22 +1,26 @@
 .main {
-  max-width: 800px;
-  margin: 1rem auto;
+  max-width: 700px;
+  margin: 0.5rem auto;
 }
 .userProfile {
   height: 40vh;
-  background-color: #333;
+  /* background-color: #333; */
   display: flex;
   justify-content: space-around;
   align-items: center;
   border-radius: 1rem;
+  border: 0.1rem solid black;
 }
 .leftSide {
   flex-basis: 45%;
-  background-color: #ccc;
+  /* background-color: #ccc; */
   padding: 0.5rem;
   height: 100%;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .rightSide {
   flex-basis: 55%;
@@ -25,6 +29,9 @@
   position: relative;
   width: 100%;
   margin-left: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .name {
   font-size: 2.2rem;
@@ -55,4 +62,20 @@
   position: absolute;
   font-size: 1.5rem;
   margin-left: 1rem;
+}
+.btn {
+  border: none;
+  margin: 0.1rem;
+  font-size: 1.2rem;
+  background-color: #000;
+  color: #fff;
+  border: 0.1rem solid black;
+  padding: 0.3rem 0.6rem;
+  margin-left: 1rem;
+  margin-top: 0.3rem;
+}
+.btn:hover {
+  background-color: #fff;
+  color: #000;
+  border: 0.1rem solid #000;
 }

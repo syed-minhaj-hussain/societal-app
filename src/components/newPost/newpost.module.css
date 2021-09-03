@@ -5,18 +5,21 @@
   scroll-behavior: smooth;
 }
 .container {
-  max-width: 1100px;
-  margin: 1rem auto;
+  max-width: 700px;
+  margin: 0rem auto;
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   height: 90vh;
   width: 100vw;
   color: #fff;
 }
+.hideContainer {
+  display: none;
+}
 .card {
-  width: 420px;
+  width: 700px;
   height: auto;
   border: 0.1rem solid #000;
   margin: 1rem auto;
@@ -80,10 +83,12 @@ input[type="submit"] {
   color: #000;
   border: 0.1rem solid #000;
 }
+
 textarea {
   padding: 0.5rem;
   color: #000;
   font-weight: 600;
+  width: 90%;
 }
 @media (max-width: 480px) {
   .container {
