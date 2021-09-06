@@ -2,7 +2,15 @@ import userStyle from "../../features/user/user.module.css";
 import { ImLocation2 } from "react-icons/im";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import { Image } from "cloudinary-react";
+import { useAuthContext } from "../../context/authContext/AuthContext";
+import { useDispatch } from "react-redux";
+import { followButtonClicked } from "../../features/user/userSlice";
+
 export const Profile = ({ rest, myFollowers, myFollowing, getUserId }) => {
+  const { logout } = useAuthContext();
+  const dispatch = useDispatch();
+  console.log({ myFollowing });
+  console.log({ rest });
   return (
     <div className={userStyle.userProfile}>
       <div className={userStyle.leftSide}>
@@ -59,9 +67,20 @@ export const Profile = ({ rest, myFollowers, myFollowing, getUserId }) => {
             {rest?.description ? rest.description : "Available"}
           </h2>
           {rest?._id !== getUserId && (
-            <button className={userStyle.btn}>
+            <button
+              className={userStyle.btn}
+              onClick={() => dispatch(followButtonClicked(rest?._id))}
+            >
               {myFollowing?.includes(rest?._id) ? "unfollow" : "follow"}
             </button>
+          )}
+          {rest?._id === getUserId && (
+            <div>
+              <button className={userStyle.btn}>Edit Profile</button>
+              <button onClick={() => logout()} className={userStyle.btn}>
+                Logout
+              </button>
+            </div>
           )}
         </div>
       </div>

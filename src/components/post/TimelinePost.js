@@ -1,23 +1,22 @@
 import React, { useEffect } from "react";
-import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 import { useToastContext } from "../../context/toastContext/ToastContext";
 import userStyle from "../../features/user/user.module.css";
 import { useDispatch } from "react-redux";
-import { likeButtonClicked } from "../../features/user/userSlice";
+import { likeButtonClicked } from "../../features/posts/postSlice";
+import { getPostById } from "../../features/posts/postSlice";
 
-export const Post = ({ post, rest }) => {
+export const TimelinePost = ({ post }) => {
   const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
   const { toast } = useToastContext();
   const dispatch = useDispatch();
-  console.log({ post });
-  console.log({ rest });
-  console.log(getUserId);
+
   return (
     <div className={userStyle.post}>
       <div className={userStyle.postUser}>
-        {rest?.profilePicture === "https://i.ibb.co/RztnCHv/user.png" ? (
+        {post?.user?.profilePicture === "https://i.ibb.co/RztnCHv/user.png" ? (
           <img
             src="https://i.ibb.co/RztnCHv/user.png"
             alt=""
@@ -26,17 +25,19 @@ export const Post = ({ post, rest }) => {
         ) : (
           <Image
             cloudName="dtb0aupd7"
-            publicId={rest?.profilePicture}
+            publicId={post?.user?.profilePicture}
             className={userStyle.postProfile}
           />
         )}
         <span style={{ padding: "1rem" }}>
           <Link
-            to={`/user/${post?.user}`}
+            to={`/user/${post?.user?._id}`}
             style={{ textDecoration: "none", color: "black" }}
           >
-            <span className={userStyle.postName}>{rest?.name}</span>
-            <span className={userStyle.postUsername}>{rest?.username}</span>
+            <span className={userStyle.postName}>{post?.user?.name}</span>
+            <span className={userStyle.postUsername}>
+              {post?.user?.username}
+            </span>
           </Link>
         </span>
       </div>
@@ -47,11 +48,11 @@ export const Post = ({ post, rest }) => {
         className={userStyle.postImage}
       />
       <div className={userStyle.postBottom}>
-        {post?.likes?.includes(getUserId) ? (
+        {post?.likes?.includes(post?.user?._id) ? (
           <IoMdHeart
             className={userStyle.like}
             onClick={() => {
-              if (getUserId === post?.user) {
+              if (getUserId === post?.user?._id) {
                 toast.error("You Can't Like Your Post!!", {
                   position: "top-right",
                   autoClose: 5000,
@@ -62,9 +63,10 @@ export const Post = ({ post, rest }) => {
                   progress: undefined,
                 });
               } else {
+                dispatch(getPostById(post?._id)());
                 dispatch(
                   likeButtonClicked({
-                    userId: getUserId,
+                    userId: post?.user._id,
                     postId: post?._id,
                   })
                 );
@@ -75,7 +77,7 @@ export const Post = ({ post, rest }) => {
           <IoMdHeartEmpty
             className={userStyle.like}
             onClick={() => {
-              if (getUserId === rest?._id) {
+              if (getUserId === post?.user?._id) {
                 toast.error("You Can't Like Your Post!!", {
                   position: "top-right",
                   autoClose: 5000,
@@ -86,9 +88,10 @@ export const Post = ({ post, rest }) => {
                   progress: undefined,
                 });
               } else {
+                dispatch(getPostById(post?._id)());
                 dispatch(
                   likeButtonClicked({
-                    userId: getUserId,
+                    userId: post?.user._id,
                     postId: post?._id,
                   })
                 );

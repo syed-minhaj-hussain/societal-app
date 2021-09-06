@@ -76,7 +76,16 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("_id");
     setAuth(null);
     setId(null);
-    navigate("/login");
+    toast.success("User Logged Out Successfully!!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
+    navigate("/");
   };
 
   const register = async (

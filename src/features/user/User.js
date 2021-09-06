@@ -11,23 +11,18 @@ import { useParams } from "react-router-dom";
 export const User = () => {
   const {
     user: { rest, myFollowers, myFollowing, getAllPostsOfUser },
-    status,
+    status = "idle",
     error,
   } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { toast } = useToastContext();
   const { userId } = useParams();
-  console.log({ userId });
-  console.log({ rest });
+
   const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(getUserIdFromParams(userId)());
-    }
-  }, [dispatch, status]);
-  console.log(rest?._id !== getUserId);
+    dispatch(getUserIdFromParams(userId)());
+  }, []);
   console.log({ getAllPostsOfUser });
-
   return (
     <>
       <div className={userStyle.main}>
@@ -39,7 +34,7 @@ export const User = () => {
         />
         <div className={userStyle.posts}>
           {getAllPostsOfUser?.map((post) => (
-            <Post post={post} rest={rest} key={post._id} />
+            <Post post={post} rest={rest} key={post._id} userId={userId} />
           ))}
         </div>
       </div>
