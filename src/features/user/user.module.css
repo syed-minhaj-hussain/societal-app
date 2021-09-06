@@ -9,7 +9,7 @@
   justify-content: space-around;
   align-items: center;
   border-radius: 1rem;
-  border: 0.1rem solid black;
+  border: 0.1rem solid rgb(219, 219, 219);
 }
 .leftSide {
   flex-basis: 45%;
@@ -48,6 +48,13 @@
   font-weight: 400;
   margin: 1rem;
 }
+.followersBtn {
+  font-weight: bold;
+}
+.followersBtn:hover {
+  padding: 0.25rem;
+  background-color: grey;
+}
 .location {
   font-size: 1rem;
   margin: 0.5rem;
@@ -78,4 +85,70 @@
   background-color: #fff;
   color: #000;
   border: 0.1rem solid #000;
+}
+
+/* posts */
+.posts {
+  max-width: 600px;
+  margin: 0.9rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.post {
+  width: 410px;
+  height: 500px;
+  border: 0.1rem solid rgb(219, 219, 219);
+  margin: 0.5rem;
+  border-radius: 1rem;
+}
+.postUser {
+  padding: 0.2rem;
+  height: 12%;
+  box-sizing: border-box;
+  position: relative;
+}
+.postProfile {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-top: 0.3rem;
+  margin-left: 0.3rem;
+}
+.postName {
+  font-size: 1.25rem;
+  font-weight: 500;
+  position: absolute;
+  top: 0.2rem;
+}
+.postUsername {
+  font-size: 1rem;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0.5rem;
+  color: darkslategrey;
+}
+.postImage {
+  height: 76%;
+  width: 100%;
+}
+.postBottom {
+  position: relative;
+  padding: 0.5rem;
+}
+.like {
+  font-size: 1.5rem;
+  position: absolute;
+  left: 1rem;
+  top: 0.5rem;
+}
+.likeCount {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  padding-bottom: 0.2rem;
+}
+.postDescription {
+  font-size: 1.2rem;
+  margin-left: 2.3rem;
 }

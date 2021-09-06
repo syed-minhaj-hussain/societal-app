@@ -11,10 +11,9 @@ export const Login = () => {
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuthContext();
-
   useEffect(() => {
     if (auth) {
-      navigate("/profile");
+      navigate(`/timeline`);
     }
   }, []);
 

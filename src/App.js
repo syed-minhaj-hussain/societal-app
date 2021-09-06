@@ -15,6 +15,7 @@ import { Profile } from "./components/profile/Profile";
 import { BottomNav } from "./components/bottomNav/BottomNav";
 import { User } from "./features/user/User";
 import { NewPost } from "./components/newPost/NewPost";
+import { TimeLine } from "./components/timeline/TimeLine";
 
 function App() {
   const [hide, setHide] = useState(true);
@@ -25,28 +26,22 @@ function App() {
   useEffect(() => {
     // console.log({ auth });
     if (!auth) {
-      navigate("/login");
+      return navigate("/");
     }
   }, []);
-  // async function getUserDetails() {
-  //   const getUser = await axios.get(`http://localhost:5000/users/${id}`, {
-  //     headers: { authorization: auth },
-  //   });
-  //   console.log(getUser);
-  // }
-  // console.log(id);
+
   return (
     <div className="App">
       {/*!auth && <Home /> */}
       {auth && <Navbar />}
       <Routes>
-        <Route path="/login" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
+        <PrivateRoute auth={auth} path="/timeline" element={<TimeLine />} />
         <PrivateRoute auth={auth} path="/search" element={<Search />} />
-        <PrivateRoute auth={auth} path="/profile" element={<Profile />} />
+        <PrivateRoute auth={auth} path="/user/:userId" element={<User />} />
       </Routes>
-      {/* <button onClick={() => getUserDetails()}>clickme</button>
-       */}{" "}
+      <button onClick={() => setHide((prev) => !prev)}>clickme</button>{" "}
       <ToastContainer
         style={{ maxWidth: "400px" }}
         position="top-right"
@@ -60,7 +55,6 @@ function App() {
         draggable
         pauseOnHover
       />
-      <User />
       <NewPost hide={hide} setHide={setHide} />
       {auth && <BottomNav className="bottomLast" />}
     </div>

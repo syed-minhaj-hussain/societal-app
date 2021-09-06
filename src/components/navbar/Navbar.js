@@ -2,15 +2,15 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import navStyle from "./nav.module.css";
 import { useAuthContext } from "../../context/authContext/AuthContext";
-import { FaHistory } from "react-icons/fa";
-import { FaListAlt } from "react-icons/fa";
-import { MdWatchLater } from "react-icons/md";
-import { AiFillLike } from "react-icons/ai";
+import { BsBellFill } from "react-icons/bs";
+import { GoSearch } from "react-icons/go";
+import { FaUserAlt } from "react-icons/fa";
 import { ImHome } from "react-icons/im";
 
 export const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const { auth, logout } = useAuthContext();
+  const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
 
   return (
     <nav className={navStyle.navbar}>
@@ -46,7 +46,7 @@ export const Navbar = () => {
               className={navStyle.navLinks}
               onClick={() => setIsActive((prev) => !prev)}
             >
-              <AiFillLike style={{ fontSize: "1.25rem" }} />
+              <GoSearch style={{ fontSize: "1.25rem" }} />
             </NavLink>
           </li>
           <li>
@@ -62,12 +62,12 @@ export const Navbar = () => {
               style={{ position: "relative" }}
               onClick={() => setIsActive((prev) => !prev)}
             >
-              <FaHistory style={{ fontSize: "1.1rem" }} />
+              <BsBellFill style={{ fontSize: "1.1rem" }} />
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/profile"
+              to={`/user/${getUserId}`}
               activeStyle={{
                 fontWeight: "bold",
                 color: "#333",
@@ -78,7 +78,7 @@ export const Navbar = () => {
               style={{ position: "relative" }}
               onClick={() => setIsActive((prev) => !prev)}
             >
-              <MdWatchLater style={{ fontSize: "1.25rem" }} />
+              <FaUserAlt style={{ fontSize: "1.25rem" }} />
             </NavLink>
           </li>
           {/* <li className={`${auth ? `${navStyle.logout}` : ""} `}>

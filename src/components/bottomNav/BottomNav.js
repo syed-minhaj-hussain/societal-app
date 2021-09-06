@@ -5,12 +5,12 @@ import navStyle from "./bottomNav.module.css";
 import { useAuthContext } from "../../context/authContext/AuthContext";
 import { BsBellFill } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
-import { MdWatchLater } from "react-icons/md";
 import { FaUserAlt } from "react-icons/fa";
 import { ImHome } from "react-icons/im";
 
 export const BottomNav = () => {
   const { auth, logout } = useAuthContext();
+  const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
   return (
     <div className={navStyle.bottomNavbar}>
       <div className={navStyle.bottom}>
@@ -61,7 +61,7 @@ export const BottomNav = () => {
           </li>
           <li>
             <NavLink
-              to="/profile"
+              to={`/user/${getUserId}`}
               activeStyle={{
                 fontWeight: "bold",
                 color: "#333",
