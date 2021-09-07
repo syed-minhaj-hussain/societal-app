@@ -13,6 +13,7 @@ export const fetchAllPosts = createAsyncThunk(
 );
 
 export const getPostById = (postId) => {
+  console.log("A", postId);
   const postLike = createAsyncThunk("posts/like", async () => {
     const response = await likePost(getAuth, postId);
     console.log({ response });
@@ -24,6 +25,8 @@ const initialState = {
   posts: [],
   status: "idle",
   error: null,
+  like: [],
+  likeStatus: "idle",
 };
 const postSlice = createSlice({
   name: "posts",
@@ -61,14 +64,14 @@ const postSlice = createSlice({
       state.error = action.error.message;
     },
     [getPostById().pending]: (state) => {
-      state.status = "loading";
+      state.likeStatus = "loading";
     },
     [getPostById().fulfilled]: (state, action) => {
-      state.posts = action.payload;
-      state.status = "fulfilled";
+      state.like = action.payload;
+      state.likeStatus = "fulfilled";
     },
     [getPostById().rejected]: (state, action) => {
-      state.status = "error";
+      state.likeStatus = "error";
       state.error = action.error.message;
     },
   },

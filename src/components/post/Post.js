@@ -13,7 +13,7 @@ export const Post = ({ post, rest }) => {
   const dispatch = useDispatch();
   console.log({ post });
   console.log({ rest });
-  console.log(getUserId);
+  // console.log(getUserId);
   return (
     <div className={userStyle.post}>
       <div className={userStyle.postUser}>
@@ -62,12 +62,12 @@ export const Post = ({ post, rest }) => {
                   progress: undefined,
                 });
               } else {
-                dispatch(
-                  likeButtonClicked({
-                    userId: getUserId,
-                    postId: post?._id,
-                  })
-                );
+                // dispatch(
+                //   likeButtonClicked({
+                //     userId: getUserId,
+                //     postId: post?._id,
+                //   })
+                // );
               }
             }}
           />
@@ -86,12 +86,12 @@ export const Post = ({ post, rest }) => {
                   progress: undefined,
                 });
               } else {
-                dispatch(
-                  likeButtonClicked({
-                    userId: getUserId,
-                    postId: post?._id,
-                  })
-                );
+                // dispatch(
+                //   likeButtonClicked({
+                //     userId: getUserId,
+                //     postId: post?._id,
+                //   })
+                // );
               }
             }}
           />

@@ -7,9 +7,15 @@ import userStyle from "../../features/user/user.module.css";
 import { useDispatch } from "react-redux";
 import { likeButtonClicked } from "../../features/posts/postSlice";
 import { getPostById } from "../../features/posts/postSlice";
+import { useSelector } from "react-redux";
 
 export const TimelinePost = ({ post }) => {
   const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
+  const {
+    posts: { like },
+    likeStatus,
+  } = useSelector((state) => state.posts);
+  console.log({ likeStatus });
   const { toast } = useToastContext();
   const dispatch = useDispatch();
 
@@ -63,13 +69,16 @@ export const TimelinePost = ({ post }) => {
                   progress: undefined,
                 });
               } else {
-                dispatch(getPostById(post?._id)());
-                dispatch(
-                  likeButtonClicked({
-                    userId: post?.user._id,
-                    postId: post?._id,
-                  })
-                );
+                console.log("here", post?.id);
+                if (likeStatus === "idle") {
+                  dispatch(getPostById(post?._id)());
+                }
+                // dispatch(
+                //   likeButtonClicked({
+                //     userId: post?.user._id,
+                //     postId: post?._id,
+                //   })
+                // );
               }
             }}
           />
@@ -88,13 +97,16 @@ export const TimelinePost = ({ post }) => {
                   progress: undefined,
                 });
               } else {
-                dispatch(getPostById(post?._id)());
-                dispatch(
-                  likeButtonClicked({
-                    userId: post?.user._id,
-                    postId: post?._id,
-                  })
-                );
+                console.log("here", post?._id);
+                if (likeStatus === "idle") {
+                  dispatch(getPostById(post?._id)());
+                }
+                // dispatch(
+                //   likeButtonClicked({
+                //     userId: post?.user._id,
+                //     postId: post?._id,
+                //   })
+                // );
               }
             }}
           />
