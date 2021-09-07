@@ -17,7 +17,7 @@ export const getPostById = (postId) => {
   const postLike = createAsyncThunk("posts/like", async () => {
     const response = await likePost(getAuth, postId);
     console.log({ response });
-    return response;
+    return response.data;
   });
   return postLike;
 };

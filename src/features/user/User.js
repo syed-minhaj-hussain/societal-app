@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 export const User = () => {
   const {
     user: { rest, myFollowers, myFollowing, getAllPostsOfUser },
-    status = "idle",
+    status,
     error,
   } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ export const User = () => {
     dispatch(getUserIdFromParams(userId)());
   }, []);
   console.log({ getAllPostsOfUser });
+  console.log({ status });
   return (
     <>
       <div className={userStyle.main}>

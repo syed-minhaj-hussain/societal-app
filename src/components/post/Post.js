@@ -6,11 +6,17 @@ import { useToastContext } from "../../context/toastContext/ToastContext";
 import userStyle from "../../features/user/user.module.css";
 import { useDispatch } from "react-redux";
 import { likeButtonClicked } from "../../features/user/userSlice";
+import { useSelector } from "react-redux";
+import { getPostById } from "../../features/posts/postSlice";
 
 export const Post = ({ post, rest }) => {
   const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
   const { toast } = useToastContext();
   const dispatch = useDispatch();
+  const {
+    posts: { like },
+    likeStatus,
+  } = useSelector((state) => state.posts);
   console.log({ post });
   console.log({ rest });
   // console.log(getUserId);
@@ -62,12 +68,15 @@ export const Post = ({ post, rest }) => {
                   progress: undefined,
                 });
               } else {
-                // dispatch(
-                //   likeButtonClicked({
-                //     userId: getUserId,
-                //     postId: post?._id,
-                //   })
-                // );
+                if (likeStatus === "idle") {
+                  dispatch(getPostById(post?._id)());
+                }
+                dispatch(
+                  likeButtonClicked({
+                    userId: getUserId,
+                    postId: post?._id,
+                  })
+                );
               }
             }}
           />
@@ -86,12 +95,15 @@ export const Post = ({ post, rest }) => {
                   progress: undefined,
                 });
               } else {
-                // dispatch(
-                //   likeButtonClicked({
-                //     userId: getUserId,
-                //     postId: post?._id,
-                //   })
-                // );
+                if (likeStatus === "idle") {
+                  dispatch(getPostById(post?._id)());
+                }
+                dispatch(
+                  likeButtonClicked({
+                    userId: getUserId,
+                    postId: post?._id,
+                  })
+                );
               }
             }}
           />

@@ -9,7 +9,11 @@ export async function getPosts(auth) {
 export async function likePost(auth, postId) {
   console.log(postId);
   console.log(authToken);
-  return await axios.get(`http://localhost:5000/post/${postId}/`, {
-    headers: { authorization: authToken },
-  });
+  return await axios.post(
+    `http://localhost:5000/post/${postId}/like`,
+    { id: postId },
+    {
+      headers: { authorization: authToken },
+    }
+  );
 }

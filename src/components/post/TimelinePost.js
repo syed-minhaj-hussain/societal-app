@@ -54,7 +54,7 @@ export const TimelinePost = ({ post }) => {
         className={userStyle.postImage}
       />
       <div className={userStyle.postBottom}>
-        {post?.likes?.includes(post?.user?._id) ? (
+        {post?.likes?.includes(getUserId) ? (
           <IoMdHeart
             className={userStyle.like}
             onClick={() => {
@@ -73,12 +73,12 @@ export const TimelinePost = ({ post }) => {
                 if (likeStatus === "idle") {
                   dispatch(getPostById(post?._id)());
                 }
-                // dispatch(
-                //   likeButtonClicked({
-                //     userId: post?.user._id,
-                //     postId: post?._id,
-                //   })
-                // );
+                dispatch(
+                  likeButtonClicked({
+                    userId: getUserId,
+                    postId: post?._id,
+                  })
+                );
               }
             }}
           />
@@ -101,12 +101,12 @@ export const TimelinePost = ({ post }) => {
                 if (likeStatus === "idle") {
                   dispatch(getPostById(post?._id)());
                 }
-                // dispatch(
-                //   likeButtonClicked({
-                //     userId: post?.user._id,
-                //     postId: post?._id,
-                //   })
-                // );
+                dispatch(
+                  likeButtonClicked({
+                    userId: getUserId,
+                    postId: post?._id,
+                  })
+                );
               }
             }}
           />
