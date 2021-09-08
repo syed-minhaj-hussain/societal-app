@@ -5,3 +5,21 @@ export async function getUser(auth, id) {
     headers: { authorization: auth },
   });
 }
+export async function follow(auth, profileId, userId) {
+  return await axios.post(
+    `http://localhost:5000/users/${profileId}/follow`,
+    { id: userId },
+    {
+      headers: { authorization: auth },
+    }
+  );
+}
+export async function unFollow(auth, profileId, userId) {
+  return await axios.post(
+    `http://localhost:5000/users/${profileId}/unfollow`,
+    { id: userId },
+    {
+      headers: { authorization: auth },
+    }
+  );
+}

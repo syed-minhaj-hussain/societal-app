@@ -5,11 +5,14 @@ import { Image } from "cloudinary-react";
 import { useAuthContext } from "../../context/authContext/AuthContext";
 import { useDispatch } from "react-redux";
 import { followButtonClicked } from "../../features/user/userSlice";
+import { followUser, unFollowUser } from "../../features/user/userSlice";
 
 export const Profile = ({ rest, myFollowers, myFollowing, getUserId }) => {
   const { logout } = useAuthContext();
   const dispatch = useDispatch();
-  console.log({ myFollowing });
+  const getUserDetails = JSON.parse(localStorage.getItem("user")) || null;
+  console.log({ getUserDetails });
+  console.log({ myFollowing, myFollowers });
   console.log({ rest });
   return (
     <div className={userStyle.userProfile}>
@@ -69,9 +72,36 @@ export const Profile = ({ rest, myFollowers, myFollowing, getUserId }) => {
           {rest?._id !== getUserId && (
             <button
               className={userStyle.btn}
-              onClick={() => dispatch(followButtonClicked(rest?._id))}
+              onClick={() => {
+                if (
+                  !myFollowers?.some(({ _id }) => _id === getUserDetails._id)
+                ) {
+                  console.log("You ALready Follow This User");
+                  dispatch(followUser(rest?._id, getUserId)());
+                  dispatch(
+                    followButtonClicked({
+                      _id: getUserDetails?._id,
+                      name: getUserDetails?.name,
+                      profilePicture: getUserDetails?.profilePicture,
+                      username: getUserDetails?.username,
+                    })
+                  );
+                } else {
+                  dispatch(unFollowUser(rest?._id, getUserId)());
+                  dispatch(
+                    followButtonClicked({
+                      _id: getUserDetails?._id,
+                      name: getUserDetails?.name,
+                      profilePicture: getUserDetails?.profilePicture,
+                      username: getUserDetails?.username,
+                    })
+                  );
+                }
+              }}
             >
-              {myFollowing?.includes(rest?._id) ? "unfollow" : "follow"}
+              {myFollowers?.some(({ _id }) => _id === getUserDetails._id)
+                ? "unfollow"
+                : "follow"}
             </button>
           )}
           {rest?._id === getUserId && (

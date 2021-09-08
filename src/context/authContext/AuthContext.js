@@ -13,6 +13,9 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("token")) || null
   );
   const [id, setId] = useState(JSON.parse(localStorage.getItem("_id")) || null);
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
   // const getAuthToken = JSON.parse(localStorage.getItem("token")) || null;
   console.log({ auth });
   // console.log(getAuthToken);
@@ -36,14 +39,15 @@ export const AuthProvider = ({ children }) => {
           progress: undefined,
         });
         const authToken = response?.data?.authToken;
-        setAuth(authToken);
-        localStorage.setItem("token", JSON.stringify(authToken));
         const userId = response?.data?.userId;
-        console.log(userId);
+        const userDetails = response?.data?.userDetails;
+        setAuth(authToken);
         setId(userId);
+        setUser(userDetails);
+        localStorage.setItem("token", JSON.stringify(authToken));
         localStorage.setItem("_id", JSON.stringify(userId));
-        // console.log(response?.data?.user);
-        navigate("/search");
+        localStorage.setItem("user", JSON.stringify(userDetails));
+        navigate("/timeline");
       } else {
         console.log(response);
         toast.error(response?.data?.message, {
@@ -74,8 +78,10 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("_id");
+    localStorage.removeItem("user");
     setAuth(null);
     setId(null);
+    setUser(null);
     toast.success("User Logged Out Successfully!!", {
       position: "top-right",
       autoClose: 2000,

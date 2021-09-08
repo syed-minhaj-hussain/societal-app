@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import postSlice from "../posts/postSlice";
-import { getUser } from "./userAPI";
+import { getUser, follow, unFollow } from "./userAPI";
 
 const getAuth = JSON.parse(localStorage.getItem("token")) || null;
 const getId = JSON.parse(localStorage.getItem("_id")) || null;
@@ -16,12 +16,33 @@ export const getUserIdFromParams = (paramsId) => {
   );
   return fetchUserByUserId;
 };
+export const followUser = (profileId, userId) => {
+  const fetchUser = createAsyncThunk("users/followUser", async () => {
+    const response = await follow(getAuth, profileId, userId);
+    console.log({ response });
+    return response?.data;
+  });
+  return fetchUser;
+};
+export const unFollowUser = (profileId, userId) => {
+  const fetchUser = createAsyncThunk("users/unFollowUser", async () => {
+    const response = await unFollow(getAuth, profileId, userId);
+    console.log({ response });
+    return response?.data;
+  });
+  return fetchUser;
+};
 
 const initialState = {
   user: [],
+  follow: [],
+  unFollow: [],
   status: "idle",
   error: null,
+  followingStatus: "idle",
+  unFollowStatus: "idle",
 };
+console.log(initialState.followingStatus);
 
 const userSlice = createSlice({
   name: "userProfile",
@@ -29,16 +50,21 @@ const userSlice = createSlice({
   reducers: {
     followButtonClicked: (state, action) => {
       console.log(action);
-      const userInFollowing = state?.user?.myFollowing.includes(action.payload);
-      console.log({ userInFollowing });
-      if (userInFollowing) {
-        state?.user?.myFollowing?.splice(action.payload);
+      const userInFollowers = state?.user?.myFollowers.some(
+        ({ _id }) => _id === action.payload._id
+      );
+      console.log({ userInFollowers });
+      if (userInFollowers) {
+        state?.user?.myFollowers?.splice(
+          ({ _id }) => _id === action.payload._id,
+          1
+        );
       } else {
-        state?.user?.myFollowing?.push(action.payload);
+        state?.user?.myFollowers?.push(action.payload);
       }
     },
     likeButtonClicked: (state, action) => {
-      console.log(action);
+      // console.log(action);
       const findPost = state?.user?.getAllPostsOfUser?.findIndex(
         (post) => post._id === action.payload.postId
       );
@@ -71,6 +97,28 @@ const userSlice = createSlice({
     },
     [getUserIdFromParams().rejected]: (state, action) => {
       state.status = "error";
+      state.error = action.error.message;
+    },
+    [followUser().pending]: (state) => {
+      state.followingStatus = "loading";
+    },
+    [followUser().fulfilled]: (state, action) => {
+      state.follow = action.payload;
+      state.followingStatus = "fulfilled";
+    },
+    [followUser().rejected]: (state, action) => {
+      state.followingStatus = "error";
+      state.error = action.error.message;
+    },
+    [unFollowUser().pending]: (state) => {
+      state.unFollowStatus = "loading";
+    },
+    [unFollowUser().fulfilled]: (state, action) => {
+      state.unFollow = action.payload;
+      state.unFollowStatus = "fulfilled";
+    },
+    [unFollowUser().rejected]: (state, action) => {
+      state.unFollowStatus = "error";
       state.error = action.error.message;
     },
   },

@@ -17,8 +17,8 @@ export const Post = ({ post, rest }) => {
     posts: { like },
     likeStatus,
   } = useSelector((state) => state.posts);
-  console.log({ post });
-  console.log({ rest });
+  // console.log({ post });
+  // console.log({ rest });
   // console.log(getUserId);
   return (
     <div className={userStyle.post}>
