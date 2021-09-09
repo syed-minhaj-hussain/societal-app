@@ -1,9 +1,9 @@
 import axios from "axios";
 const authToken = JSON.parse(localStorage.getItem("token")) || null;
 console.log({ authToken });
-export async function getPosts(auth) {
+export async function getPosts(authToken) {
   return await axios.get(`https://societal.herokuapp.com/timeline`, {
-    headers: { authorization: auth },
+    headers: { authorization: authToken },
   });
 }
 export async function likePost(auth, postId) {
