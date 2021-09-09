@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("token", JSON.stringify(authToken));
         localStorage.setItem("_id", JSON.stringify(userId));
         localStorage.setItem("user", JSON.stringify(userDetails));
-        navigate("/timeline");
+        setTimeout(() => navigate("/timeline"), 1000);
       } else {
         console.log(response);
         toast.error(response?.data?.message, {
