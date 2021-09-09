@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { act } from "react-dom/test-utils";
-import postSlice from "../posts/postSlice";
-import { getUser, follow, unFollow } from "./userAPI";
+import { getUser, follow, unFollow, searchUserApi } from "./userAPI";
 
 const getAuth = JSON.parse(localStorage.getItem("token")) || null;
 const getId = JSON.parse(localStorage.getItem("_id")) || null;
@@ -33,15 +31,25 @@ export const unFollowUser = (profileId, userId) => {
   });
   return fetchUser;
 };
+export const searchUserByName = (name) => {
+  const getUserByName = createAsyncThunk("users/searchUser", async () => {
+    const response = await searchUserApi(getAuth, name);
+    console.log({ response });
+    return response?.data;
+  });
+  return getUserByName;
+};
 
 const initialState = {
   user: [],
   follow: [],
   unFollow: [],
+  searchUser: [],
   status: "idle",
   error: null,
   followingStatus: "idle",
   unFollowStatus: "idle",
+  searchStatus: "idle",
 };
 console.log(initialState.followingStatus);
 
@@ -121,7 +129,18 @@ const userSlice = createSlice({
       state.unFollowStatus = "fulfilled";
     },
     [unFollowUser().rejected]: (state, action) => {
-      state.unFollowStatus = "error";
+      state.searchStatus = "error";
+      state.error = action.error.message;
+    },
+    [searchUserByName().pending]: (state) => {
+      state.searchStatus = "loading";
+    },
+    [searchUserByName().fulfilled]: (state, action) => {
+      state.searchUser = action.payload;
+      state.searchStatus = "fulfilled";
+    },
+    [searchUserByName().rejected]: (state, action) => {
+      state.searchStatus = "error";
       state.error = action.error.message;
     },
   },

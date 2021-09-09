@@ -23,3 +23,8 @@ export async function unFollow(auth, profileId, userId) {
     }
   );
 }
+export async function searchUserApi(auth, name) {
+  return await axios.get(`http://localhost:5000/users/search/${name}`, {
+    headers: { authorization: auth },
+  });
+}

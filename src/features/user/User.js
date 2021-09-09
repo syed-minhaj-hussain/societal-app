@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserIdFromParams } from "./userSlice";
 import userStyle from "./user.module.css";
 import { useToastContext } from "../../context/toastContext/ToastContext";
-import { getUser } from "./userAPI";
 import { useParams } from "react-router-dom";
 
 export const User = () => {
