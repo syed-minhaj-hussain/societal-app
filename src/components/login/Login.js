@@ -8,8 +8,8 @@ export const Login = () => {
   const { toast } = useToastContext();
   const { auth } = useAuthContext();
   const navigate = useNavigate();
-  const [text, setText] = useState("");
-  const [password, setPassword] = useState("");
+  const [text, setText] = useState("Test@gmail.com");
+  const [password, setPassword] = useState("abc123");
   const { login } = useAuthContext();
   useEffect(() => {
     if (auth) {
