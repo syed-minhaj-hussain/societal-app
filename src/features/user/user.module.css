@@ -43,6 +43,9 @@
   font-weight: bold;
   margin-left: 1rem;
 }
+.moblie {
+  display: none;
+}
 .followers {
   font-size: 1.25rem;
   font-weight: 400;
@@ -169,11 +172,15 @@
     flex-basis: 65%;
   }
   .name {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
+    margin-left: 0.7rem;
   }
   .username {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-left: 0.8rem;
+  }
+  .moblie {
+    display: block;
   }
   .followers {
     font-size: 1rem;
@@ -184,7 +191,7 @@
     padding: 0.2rem;
   }
   .description {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 400;
     margin-left: 2.6rem;
   }
@@ -193,6 +200,12 @@
     font-size: 1.45rem;
     margin-left: 1rem;
   }
+  .btn {
+    margin: 0.1rem;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.5rem;
+  }
+
   .posts {
     max-width: 480px;
     margin: 0.9rem auto;

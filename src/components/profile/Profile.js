@@ -56,6 +56,7 @@ export const Profile = ({ rest, myFollowers, myFollowing, getUserId }) => {
             </span>{" "}
             <span className={userStyle.followersBtn}>
               {" "}
+              <br className={userStyle.moblie} />
               {myFollowing?.length}{" "}
               <span style={{ fontWeight: "400" }}>following</span>
             </span>{" "}

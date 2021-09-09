@@ -20,7 +20,7 @@ export const User = () => {
   const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
   useEffect(() => {
     dispatch(getUserIdFromParams(userId)());
-  }, []);
+  }, [userId]);
   console.log({ getAllPostsOfUser });
   console.log({ status });
   return (
