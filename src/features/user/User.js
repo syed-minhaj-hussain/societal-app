@@ -33,6 +33,7 @@ export const User = () => {
           getUserId={getUserId}
         />
         <div className={userStyle.posts}>
+          {getAllPostsOfUser?.length === 0 && <h1>No Posts</h1>}
           {getAllPostsOfUser?.map((post) => (
             <Post post={post} rest={rest} key={post._id} userId={userId} />
           ))}
