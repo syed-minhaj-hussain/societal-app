@@ -57,34 +57,39 @@ export const Search = () => {
           placeholder="Search User.."
         />
       </form>
-      {users?.map((user) => (
-        <div className={searchStyle.searchComponent} key={user?._id}>
-          <Link
-            to={`/user/${user?._id}`}
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            <div className={userStyle.postUser}>
-              {user?.profilePicture === "https://i.ibb.co/RztnCHv/user.png" ? (
-                <img
-                  src="https://i.ibb.co/RztnCHv/user.png"
-                  alt=""
-                  className={userStyle.postProfile}
-                />
-              ) : (
-                <Image
-                  cloudName="dtb0aupd7"
-                  publicId={user?.profilePicture}
-                  className={userStyle.postProfile}
-                />
-              )}
-              <span style={{ padding: "1rem" }}>
-                <span className={userStyle.postName}>{user?.name}</span>
-                <span className={userStyle.postUsername}>{user?.username}</span>
-              </span>
-            </div>
-          </Link>
-        </div>
-      ))}
+      <div className={searchStyle.searchComponentWrapper}>
+        {users?.map((user) => (
+          <div className={searchStyle.searchComponent} key={user?._id}>
+            <Link
+              to={`/user/${user?._id}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <div className={userStyle.postUser}>
+                {user?.profilePicture ===
+                "https://i.ibb.co/RztnCHv/user.png" ? (
+                  <img
+                    src="https://i.ibb.co/RztnCHv/user.png"
+                    alt=""
+                    className={userStyle.postProfile}
+                  />
+                ) : (
+                  <Image
+                    cloudName="dtb0aupd7"
+                    publicId={user?.profilePicture}
+                    className={userStyle.postProfile}
+                  />
+                )}
+                <span style={{ padding: "1rem" }}>
+                  <span className={userStyle.postName}>{user?.name}</span>
+                  <span className={userStyle.postUsername}>
+                    {user?.username}
+                  </span>
+                </span>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

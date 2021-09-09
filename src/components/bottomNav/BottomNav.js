@@ -3,7 +3,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import navStyle from "./bottomNav.module.css";
 import { useAuthContext } from "../../context/authContext/AuthContext";
-import { BsBellFill } from "react-icons/bs";
+import { RiAddBoxFill } from "react-icons/ri";
 import { GoSearch } from "react-icons/go";
 import { FaUserAlt } from "react-icons/fa";
 import { ImHome } from "react-icons/im";
@@ -46,7 +46,7 @@ export const BottomNav = () => {
           </li>
           <li>
             <NavLink
-              to="/notification"
+              to="/newPost"
               activeStyle={{
                 fontWeight: "bold",
                 color: "#333",
@@ -56,7 +56,7 @@ export const BottomNav = () => {
               className={navStyle.navLinks}
               style={{ position: "relative" }}
             >
-              <BsBellFill style={{ fontSize: "1.1rem" }} />
+              <RiAddBoxFill style={{ fontSize: "1.35rem" }} />
             </NavLink>
           </li>
           <li>

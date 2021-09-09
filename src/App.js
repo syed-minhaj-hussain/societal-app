@@ -10,11 +10,9 @@ import { PrivateRoute } from "./components/privateRoutes/PrivateRoute";
 import { Navbar } from "./components/navbar/Navbar";
 import { Register } from "./components/register/Register";
 import { Search } from "./components/search/Search";
-import { Profile } from "./components/profile/Profile";
 import { BottomNav } from "./components/bottomNav/BottomNav";
 import { User } from "./features/user/User";
 import { NewPost } from "./components/newPost/NewPost";
-import { TimeLine } from "./components/timeline/TimeLine";
 import { LoadAllPosts } from "./features/posts/LoadAllPosts";
 
 function App() {

@@ -152,3 +152,64 @@
   font-size: 1.1rem;
   margin-left: 2.3rem;
 }
+
+/* responsive */
+@media (max-width: 480px) {
+  .main {
+    max-width: 480px;
+    margin: 0.5rem auto;
+  }
+  .userProfile {
+    margin: 0.5rem;
+  }
+  .leftSide {
+    flex-basis: 35%;
+  }
+  .rightSide {
+    flex-basis: 65%;
+  }
+  .name {
+    font-size: 1.7rem;
+  }
+  .username {
+    font-size: 1.1rem;
+    margin-left: 0.8rem;
+  }
+  .followers {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.9rem;
+  }
+  .followersBtn:hover {
+    padding: 0.2rem;
+  }
+  .description {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-left: 2.6rem;
+  }
+  .descriptionIcon {
+    position: absolute;
+    font-size: 1.45rem;
+    margin-left: 1rem;
+  }
+  .posts {
+    max-width: 480px;
+    margin: 0.9rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3.5rem;
+  }
+  .post {
+    width: 350px;
+    height: 500px;
+    border: 0.1rem solid rgb(219, 219, 219);
+    margin: 0.5rem;
+    border-radius: 1rem;
+  }
+  .postDescription {
+    font-size: 0.9rem;
+    margin-left: 2.4rem;
+  }
+}
