@@ -3,14 +3,14 @@ import { getPosts, likePost } from "./postAPI";
 
 const getAuth = JSON.parse(localStorage.getItem("token")) || null;
 console.log({ getAuth });
-export const fetchAllPosts = createAsyncThunk(
-  "posts/fetchAllPosts",
-  async () => {
-    const response = await getPosts(getAuth);
+export const getAuthForFetchPosts = (auth) => {
+  const fetchAllPosts = createAsyncThunk("posts/fetchAllPosts", async () => {
+    const response = await getPosts(auth);
     console.log({ response });
     return response?.data;
-  }
-);
+  });
+  return fetchAllPosts;
+};
 
 export const getPostById = (postId) => {
   console.log("A", postId);
@@ -52,14 +52,14 @@ const postSlice = createSlice({
     },
   },
   extraReducers: {
-    [fetchAllPosts.pending]: (state) => {
+    [getAuthForFetchPosts().pending]: (state) => {
       state.status = "loading";
     },
-    [fetchAllPosts.fulfilled]: (state, action) => {
+    [getAuthForFetchPosts().fulfilled]: (state, action) => {
       state.posts = action.payload;
       state.status = "fulfilled";
     },
-    [fetchAllPosts.rejected]: (state, action) => {
+    [getAuthForFetchPosts().rejected]: (state, action) => {
       state.status = "error";
       state.error = action.error.message;
     },
