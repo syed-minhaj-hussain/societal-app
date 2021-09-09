@@ -18,7 +18,6 @@ import { TimeLine } from "./components/timeline/TimeLine";
 import { LoadAllPosts } from "./features/posts/LoadAllPosts";
 
 function App() {
-  const [hide, setHide] = useState(true);
   const { ToastContainer } = useToastContext();
   const { auth, id } = useAuthContext();
   const navigate = useNavigate();
@@ -40,8 +39,8 @@ function App() {
         <PrivateRoute auth={auth} path="/timeline" element={<LoadAllPosts />} />
         <PrivateRoute auth={auth} path="/search" element={<Search />} />
         <PrivateRoute auth={auth} path="/user/:userId" element={<User />} />
+        <PrivateRoute auth={auth} path="/newPost" element={<NewPost />} />
       </Routes>
-      <button onClick={() => setHide((prev) => !prev)}>clickme</button>{" "}
       <ToastContainer
         style={{ maxWidth: "400px" }}
         position="top-right"
@@ -55,7 +54,6 @@ function App() {
         draggable
         pauseOnHover
       />
-      <NewPost hide={hide} setHide={setHide} />
       {auth && <BottomNav className="bottomLast" />}
     </div>
   );

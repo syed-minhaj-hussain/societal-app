@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 import postSlice from "../posts/postSlice";
 import { getUser, follow, unFollow } from "./userAPI";
 
@@ -53,7 +54,9 @@ const userSlice = createSlice({
       const userInFollowers = state?.user?.myFollowers.some(
         ({ _id }) => _id === action.payload._id
       );
+
       console.log({ userInFollowers });
+
       if (userInFollowers) {
         state?.user?.myFollowers?.splice(
           ({ _id }) => _id === action.payload._id,

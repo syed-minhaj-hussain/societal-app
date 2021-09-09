@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import navStyle from "./nav.module.css";
 import { useAuthContext } from "../../context/authContext/AuthContext";
-import { BsBellFill } from "react-icons/bs";
+import { RiAddBoxFill } from "react-icons/ri";
 import { GoSearch } from "react-icons/go";
 import { FaUserAlt } from "react-icons/fa";
 import { ImHome } from "react-icons/im";
@@ -51,7 +51,7 @@ export const Navbar = () => {
           </li>
           <li>
             <NavLink
-              to="/notification"
+              to="/newPost"
               activeStyle={{
                 fontWeight: "bold",
                 color: "#333",
@@ -62,7 +62,7 @@ export const Navbar = () => {
               style={{ position: "relative" }}
               onClick={() => setIsActive((prev) => !prev)}
             >
-              <BsBellFill style={{ fontSize: "1.1rem" }} />
+              <RiAddBoxFill style={{ fontSize: "1.5rem" }} />
             </NavLink>
           </li>
           <li>

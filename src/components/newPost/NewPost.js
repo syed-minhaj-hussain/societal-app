@@ -7,7 +7,7 @@ import { useAuthContext } from "../../context/authContext/AuthContext";
 import newPostStyle from "./newpost.module.css";
 import { useToastContext } from "../../context/toastContext/ToastContext";
 
-export const NewPost = ({ hide, setHide }) => {
+export const NewPost = () => {
   const { auth } = useAuthContext();
   const navigate = useNavigate();
   const { toast } = useToastContext();
@@ -36,11 +36,7 @@ export const NewPost = ({ hide, setHide }) => {
 
   return (
     <>
-      <div
-        className={`${
-          hide ? newPostStyle.hideContainer : newPostStyle.container
-        } `}
-      >
+      <div className={`${newPostStyle.container} `}>
         <section>
           <div className={newPostStyle.card}>
             <h3 style={{ marginBottom: "1rem" }}>New Post</h3>
@@ -75,6 +71,7 @@ export const NewPost = ({ hide, setHide }) => {
                     );
                     console.log({ response });
                     if (response?.data?.success === true) {
+                      navigate("/timeline");
                       return toast.success(response?.data?.message, {
                         position: "top-right",
                         autoClose: 5000,
@@ -86,6 +83,7 @@ export const NewPost = ({ hide, setHide }) => {
                       });
                     }
                     if (response?.data?.success === false) {
+                      navigate("/timeline");
                       return toast.error(response.data.message, {
                         position: "top-right",
                         autoClose: 3000,
