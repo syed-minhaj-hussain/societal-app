@@ -22,10 +22,13 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (text, password) => {
     try {
-      const response = await axios.post("http://localhost:5000/login", {
-        email: text,
-        password: password,
-      });
+      const response = await axios.post(
+        "https://societal.herokuapp.com/login",
+        {
+          email: text,
+          password: password,
+        }
+      );
       //
       if (response?.data?.success === true) {
         console.log({ response });
@@ -104,15 +107,18 @@ export const AuthProvider = ({ children }) => {
     description
   ) => {
     try {
-      const response = await axios.post("http://localhost:5000/register", {
-        name: text,
-        username: username,
-        email: email,
-        password: password,
-        profilePicture: url,
-        description: description,
-        location: location,
-      });
+      const response = await axios.post(
+        "https://societal.herokuapp.com/register",
+        {
+          name: text,
+          username: username,
+          email: email,
+          password: password,
+          profilePicture: url,
+          description: description,
+          location: location,
+        }
+      );
 
       if (response?.data?.success === true) {
         console.log(response);

@@ -1,16 +1,15 @@
 import axios from "axios";
-// axios.defaults.timeout = 36000000;
 const authToken = JSON.parse(localStorage.getItem("token"));
 export async function getPosts(auth) {
-  return await axios.get(`http://localhost:5000/timeline`, {
+  return await axios.get(`https://societal.herokuapp.com/timeline`, {
     headers: { authorization: auth },
   });
 }
 export async function likePost(auth, postId) {
-  console.log(postId);
-  console.log(authToken);
+  // console.log(postId);
+  // console.log(authToken);
   return await axios.post(
-    `http://localhost:5000/post/${postId}/like`,
+    `https://societal.herokuapp.com/post/${postId}/like`,
     { id: postId },
     {
       headers: { authorization: authToken },

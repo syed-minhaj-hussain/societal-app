@@ -1,13 +1,12 @@
 import axios from "axios";
-// axios.defaults.timeout = 36000000;
 export async function getUser(auth, id) {
-  return await axios.get(`http://localhost:5000/users/${id}`, {
+  return await axios.get(`https://societal.herokuapp.com/users/${id}`, {
     headers: { authorization: auth },
   });
 }
 export async function follow(auth, profileId, userId) {
   return await axios.post(
-    `http://localhost:5000/users/${profileId}/follow`,
+    `https://societal.herokuapp.com/users/${profileId}/follow`,
     { id: userId },
     {
       headers: { authorization: auth },
@@ -16,7 +15,7 @@ export async function follow(auth, profileId, userId) {
 }
 export async function unFollow(auth, profileId, userId) {
   return await axios.post(
-    `http://localhost:5000/users/${profileId}/unfollow`,
+    `https://societal.herokuapp.com/users/${profileId}/unfollow`,
     { id: userId },
     {
       headers: { authorization: auth },
@@ -24,7 +23,10 @@ export async function unFollow(auth, profileId, userId) {
   );
 }
 export async function searchUserApi(auth, name) {
-  return await axios.get(`http://localhost:5000/users/search/${name}`, {
-    headers: { authorization: auth },
-  });
+  return await axios.get(
+    `https://societal.herokuapp.com/users/search/${name}`,
+    {
+      headers: { authorization: auth },
+    }
+  );
 }

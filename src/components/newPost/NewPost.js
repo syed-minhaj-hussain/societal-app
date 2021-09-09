@@ -60,7 +60,7 @@ export const NewPost = () => {
                   const url = await uploadImage();
                   if (url) {
                     const response = await axios.post(
-                      `http://localhost:5000/post`,
+                      `https://societal.herokuapp.com/post`,
                       {
                         description: description,
                         image: url,
