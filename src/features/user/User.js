@@ -4,8 +4,8 @@ import { Profile } from "../../components/profile/Profile";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserIdFromParams } from "./userSlice";
 import userStyle from "./user.module.css";
-import { useToastContext } from "../../context/toastContext/ToastContext";
 import { useParams } from "react-router-dom";
+import { useAuthContext } from "../../context/authContext/AuthContext";
 
 export const User = () => {
   const {
@@ -14,12 +14,11 @@ export const User = () => {
     error,
   } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const { toast } = useToastContext();
   const { userId } = useParams();
-
+  const { auth } = useAuthContext();
   const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
   useEffect(() => {
-    dispatch(getUserIdFromParams(userId)());
+    dispatch(getUserIdFromParams(userId, auth)());
   }, [userId]);
   console.log({ getAllPostsOfUser });
   console.log({ status });

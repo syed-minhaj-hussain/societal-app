@@ -6,9 +6,11 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
+import { useAuthContext } from "../../context/authContext/AuthContext";
 
 export const Search = () => {
   const [searchValue, setSearchValue] = useState("");
+  const { auth } = useAuthContext();
   const {
     searchUser: { users },
     searchStatus,
@@ -27,7 +29,7 @@ export const Search = () => {
   const getValueForCallingApi = useDebounce(searchValue, 500);
   useEffect(() => {
     if (getValueForCallingApi) {
-      dispatch(searchUserByName(getValueForCallingApi)());
+      dispatch(searchUserByName(getValueForCallingApi, auth)());
     }
   }, [getValueForCallingApi]);
   console.log({ users });

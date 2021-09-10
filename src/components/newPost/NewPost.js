@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { BsFillImageFill } from "react-icons/bs";
@@ -14,7 +14,7 @@ export const NewPost = () => {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState();
 
-  const getUserId = JSON.parse(localStorage?.getItem("_id"));
+  // const getUserId = JSON.parse(localStorage?.getItem("_id"));
 
   // useEffect(() => {
   //   if (auth) {

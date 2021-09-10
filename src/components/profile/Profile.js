@@ -8,7 +8,7 @@ import { followButtonClicked } from "../../features/user/userSlice";
 import { followUser, unFollowUser } from "../../features/user/userSlice";
 
 export const Profile = ({ rest, myFollowers, myFollowing, getUserId }) => {
-  const { logout } = useAuthContext();
+  const { logout, auth } = useAuthContext();
   const dispatch = useDispatch();
   const getUserDetails = JSON.parse(localStorage.getItem("user")) || null;
   console.log({ getUserDetails });
@@ -78,7 +78,7 @@ export const Profile = ({ rest, myFollowers, myFollowing, getUserId }) => {
                   !myFollowers?.some(({ _id }) => _id === getUserDetails._id)
                 ) {
                   console.log("You ALready Follow This User");
-                  dispatch(followUser(rest?._id, getUserId)());
+                  dispatch(followUser(rest?._id, getUserId, auth)());
                   dispatch(
                     followButtonClicked({
                       _id: getUserDetails?._id,
@@ -88,7 +88,7 @@ export const Profile = ({ rest, myFollowers, myFollowing, getUserId }) => {
                     })
                   );
                 } else {
-                  dispatch(unFollowUser(rest?._id, getUserId)());
+                  dispatch(unFollowUser(rest?._id, getUserId, auth)());
                   dispatch(
                     followButtonClicked({
                       _id: getUserDetails?._id,

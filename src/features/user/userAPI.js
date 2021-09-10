@@ -1,5 +1,6 @@
 import axios from "axios";
 export async function getUser(auth, id) {
+  console.log("getUser::", { auth });
   return await axios.get(`https://societal.herokuapp.com/users/${id}`, {
     headers: { authorization: auth },
   });

@@ -1,15 +1,11 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import navStyle from "./nav.module.css";
-import { useAuthContext } from "../../context/authContext/AuthContext";
 import { RiAddBoxFill } from "react-icons/ri";
 import { GoSearch } from "react-icons/go";
 import { FaUserAlt } from "react-icons/fa";
 import { ImHome } from "react-icons/im";
 
 export const Navbar = () => {
-  const [isActive, setIsActive] = useState(false);
-  const { auth, logout } = useAuthContext();
   const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
 
   return (
@@ -29,7 +25,6 @@ export const Navbar = () => {
               }}
               className={navStyle.navLinks}
               end
-              onClick={() => setIsActive((prev) => !prev)}
             >
               <ImHome style={{ fontSize: "1.25rem" }} />
             </NavLink>
@@ -44,7 +39,6 @@ export const Navbar = () => {
                 height: "100%",
               }}
               className={navStyle.navLinks}
-              onClick={() => setIsActive((prev) => !prev)}
             >
               <GoSearch style={{ fontSize: "1.25rem" }} />
             </NavLink>
@@ -60,7 +54,6 @@ export const Navbar = () => {
               }}
               className={navStyle.navLinks}
               style={{ position: "relative" }}
-              onClick={() => setIsActive((prev) => !prev)}
             >
               <RiAddBoxFill style={{ fontSize: "1.5rem" }} />
             </NavLink>
@@ -76,7 +69,6 @@ export const Navbar = () => {
               }}
               className={navStyle.navLinks}
               style={{ position: "relative" }}
-              onClick={() => setIsActive((prev) => !prev)}
             >
               <FaUserAlt style={{ fontSize: "1.25rem" }} />
             </NavLink>

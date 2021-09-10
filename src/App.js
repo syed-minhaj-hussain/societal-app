@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ import { LoadAllPosts } from "./features/posts/LoadAllPosts";
 
 function App() {
   const { ToastContainer } = useToastContext();
-  const { auth, id } = useAuthContext();
+  const { auth } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,11 +25,10 @@ function App() {
     if (!auth) {
       return navigate("/");
     }
-  }, []);
+  }, [auth]);
 
   return (
     <div className="App">
-      {/*!auth && <Home /> */}
       {auth && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />

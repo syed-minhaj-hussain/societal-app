@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
@@ -8,9 +8,11 @@ import { useDispatch } from "react-redux";
 import { likeButtonClicked } from "../../features/user/userSlice";
 import { useSelector } from "react-redux";
 import { getPostById } from "../../features/posts/postSlice";
+import { useAuthContext } from "../../context/authContext/AuthContext";
 
 export const Post = ({ post, rest }) => {
   const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
+  const { auth } = useAuthContext();
   const { toast } = useToastContext();
   const dispatch = useDispatch();
   const {
@@ -69,7 +71,7 @@ export const Post = ({ post, rest }) => {
                 });
               } else {
                 if (likeStatus === "idle") {
-                  dispatch(getPostById(post?._id)());
+                  dispatch(getPostById(post?._id, auth)());
                 }
                 dispatch(
                   likeButtonClicked({
@@ -96,7 +98,7 @@ export const Post = ({ post, rest }) => {
                 });
               } else {
                 if (likeStatus === "idle") {
-                  dispatch(getPostById(post?._id)());
+                  dispatch(getPostById(post?._id, auth)());
                 }
                 dispatch(
                   likeButtonClicked({

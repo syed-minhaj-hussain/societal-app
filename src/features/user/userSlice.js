@@ -1,39 +1,38 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getUser, follow, unFollow, searchUserApi } from "./userAPI";
 
-const getAuth = JSON.parse(localStorage.getItem("token")) || null;
-const getId = JSON.parse(localStorage.getItem("_id")) || null;
-console.log({ getAuth, getId });
-export const getUserIdFromParams = (paramsId) => {
+// const getId = JSON.parse(localStorage.getItem("_id")) || null;
+
+export const getUserIdFromParams = (paramsId, auth) => {
   const fetchUserByUserId = createAsyncThunk(
     "users/fetchUserByUserId",
     async () => {
-      const response = await getUser(getAuth, paramsId);
+      const response = await getUser(auth, paramsId);
       console.log({ response });
       return response?.data;
     }
   );
   return fetchUserByUserId;
 };
-export const followUser = (profileId, userId) => {
+export const followUser = (profileId, userId, auth) => {
   const fetchUser = createAsyncThunk("users/followUser", async () => {
-    const response = await follow(getAuth, profileId, userId);
+    const response = await follow(auth, profileId, userId);
     console.log({ response });
     return response?.data;
   });
   return fetchUser;
 };
-export const unFollowUser = (profileId, userId) => {
+export const unFollowUser = (profileId, userId, auth) => {
   const fetchUser = createAsyncThunk("users/unFollowUser", async () => {
-    const response = await unFollow(getAuth, profileId, userId);
+    const response = await unFollow(auth, profileId, userId);
     console.log({ response });
     return response?.data;
   });
   return fetchUser;
 };
-export const searchUserByName = (name) => {
+export const searchUserByName = (name, auth) => {
   const getUserByName = createAsyncThunk("users/searchUser", async () => {
-    const response = await searchUserApi(getAuth, name);
+    const response = await searchUserApi(auth, name);
     console.log({ response });
     return response?.data;
   });

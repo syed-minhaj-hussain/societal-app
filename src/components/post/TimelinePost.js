@@ -8,9 +8,11 @@ import { useDispatch } from "react-redux";
 import { likeButtonClicked } from "../../features/posts/postSlice";
 import { getPostById } from "../../features/posts/postSlice";
 import { useSelector } from "react-redux";
+import { useAuthContext } from "../../context/authContext/AuthContext";
 
 export const TimelinePost = ({ post }) => {
   const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
+  const { auth } = useAuthContext();
   const {
     posts: { like },
     likeStatus,
@@ -71,7 +73,7 @@ export const TimelinePost = ({ post }) => {
               } else {
                 console.log("here", post?.id);
                 if (likeStatus === "idle") {
-                  dispatch(getPostById(post?._id)());
+                  dispatch(getPostById(post?._id, auth)());
                 }
                 dispatch(
                   likeButtonClicked({
@@ -99,7 +101,7 @@ export const TimelinePost = ({ post }) => {
               } else {
                 console.log("here", post?._id);
                 if (likeStatus === "idle") {
-                  dispatch(getPostById(post?._id)());
+                  dispatch(getPostById(post?._id, auth)());
                 }
                 dispatch(
                   likeButtonClicked({

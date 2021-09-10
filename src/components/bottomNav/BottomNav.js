@@ -1,15 +1,14 @@
 import React from "react";
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import navStyle from "./bottomNav.module.css";
-import { useAuthContext } from "../../context/authContext/AuthContext";
+// import { useAuthContext } from "../../context/authContext/AuthContext";
 import { RiAddBoxFill } from "react-icons/ri";
 import { GoSearch } from "react-icons/go";
 import { FaUserAlt } from "react-icons/fa";
 import { ImHome } from "react-icons/im";
 
 export const BottomNav = () => {
-  const { auth, logout } = useAuthContext();
+  // const { auth, logout } = useAuthContext();
   const getUserId = JSON.parse(localStorage.getItem("_id")) || null;
   return (
     <div className={navStyle.bottomNavbar}>
