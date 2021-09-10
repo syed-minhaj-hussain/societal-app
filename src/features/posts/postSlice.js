@@ -13,7 +13,7 @@ export const getAuthForFetchPosts = (auth) => {
 };
 
 export const getPostById = (postId, auth) => {
-  console.log("A", postId);
+  // console.log("A", postId);
   const postLike = createAsyncThunk("posts/like", async () => {
     const response = await likePost(auth, postId);
     console.log({ response });
