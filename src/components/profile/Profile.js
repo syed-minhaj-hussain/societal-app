@@ -107,7 +107,7 @@ export const Profile = ({ rest, myFollowers, myFollowing, getUserId }) => {
           )}
           {rest?._id === getUserId && (
             <div>
-              <button className={userStyle.btn}>Edit Profile</button>
+              {/** <button className={userStyle.btn}>Edit Profile</button> */}
               <button onClick={() => logout()} className={userStyle.btn}>
                 Logout
               </button>

@@ -107,7 +107,7 @@
 }
 .postUser {
   padding: 0.2rem;
-  height: 12%;
+  height: 10%;
   box-sizing: border-box;
   position: relative;
 }
@@ -138,6 +138,7 @@
 .postBottom {
   position: relative;
   padding: 0.5rem;
+  height: auto;
 }
 .like {
   font-size: 1.5rem;
@@ -152,7 +153,7 @@
   padding-bottom: 0.2rem;
 }
 .postDescription {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   margin-left: 2.3rem;
 }
 

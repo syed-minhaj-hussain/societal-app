@@ -175,7 +175,7 @@ export const Register = () => {
             </form>
           </div>
           <p style={{ textAlign: "center", color: "black" }}>
-            Already have an account ? <Link to="/login">login</Link>{" "}
+            Already have an account ? <Link to="/">login</Link>{" "}
           </p>
         </section>
       </div>
