@@ -31,7 +31,6 @@
 .searchComponentWrapper {
   height: 70vh;
   width: 400px;
-  overflow-y: scroll;
 }
 .searchComponent {
   width: 400px;

@@ -107,7 +107,7 @@
 }
 .postUser {
   padding: 0.2rem;
-  height: 10%;
+  height: 12%;
   box-sizing: border-box;
   position: relative;
 }
@@ -145,6 +145,7 @@
   position: absolute;
   left: 1rem;
   top: 0.5rem;
+  cursor: pointer;
 }
 .likeCount {
   font-size: 1rem;
